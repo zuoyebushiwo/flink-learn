@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="flink-iceberg" />
+        <module name="flink-core" />
       </profile>
     </annotationProcessing>
   </component>

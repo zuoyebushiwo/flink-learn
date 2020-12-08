@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>flink-iceberg</module>
         <module>flink-core</module>
+        <module>flink-iceberg</module>
     </modules>
 
     <properties>

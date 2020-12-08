@@ -1,13 +1,16 @@
 package com.zuoye.flink.iceberg;
 
+import org.apache.flink.table.api.EnvironmentSettings;
+import org.apache.flink.table.api.TableEnvironment;
+
 /**
  * @author ZhangXueJun
- * @title
- * @date 2020/12/8 14:31
+ * @title IcebergWriteHiveTable
+ * @date 2020/12/8 15:29
  * @projectName flink-learn
  * @description
  */
-public class Iceberg {
+public class IcebergWriteHiveTable {
 
     public static void main(String[] args) {
         EnvironmentSettings environmentSettings = EnvironmentSettings.newInstance().inBatchMode().useBlinkPlanner().build();
@@ -43,7 +46,6 @@ public class Iceberg {
 
 
         tenv.executeSql("select * from iceberg.iceberg_db.sourcetable").print();
+
     }
-
-
 }
