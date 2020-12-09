@@ -1,6 +1,7 @@
 package com.zuoye.flink.iceberg;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.flink.configuration.Configuration;
 import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.TableEnvironment;
 
@@ -18,8 +19,12 @@ public class IcebergWriteHiveTable {
         System.setProperty("HADOOP_USER_NAME", "hive");
         System.setProperty("HADOOP_CLASSPATH", "D:/program/hadoop-3.1.1/bin/hadoop classpath");
         EnvironmentSettings environmentSettings = EnvironmentSettings.newInstance().inBatchMode().useBlinkPlanner().build();
-        TableEnvironment tenv = TableEnvironment.create(environmentSettings);
-        tenv.executeSql("CREATE CATALOG iceberg WITH (\n" +
+        TableEnvironment tableEnv = TableEnvironment.create(environmentSettings);
+
+        Configuration configuration = tableEnv.getConfig().getConfiguration();
+        configuration.setString("akka.ask.timeout", "10 min");
+
+        tableEnv.executeSql("CREATE CATALOG iceberg WITH (\n" +
                 "  'type'='iceberg',\n" +
                 "  'catalog-type'='hive'," +
                 "  'uri'='thrift://hd-node-3-41.wakedata.com:9083,thrift://hd-node-3-42.wakedata.com:9083,thrift://wake-sz-vm-3-94.wakedata.com:9083', " +
@@ -28,25 +33,25 @@ public class IcebergWriteHiveTable {
                 "  'warehouse'='hdfs://HDFSCluster/warehouse'" +
                 ")");
 
-        tenv.useCatalog("iceberg");
+        tableEnv.useCatalog("iceberg");
         /*tenv.executeSql("CREATE DATABASE iceberg_db_whx");
         tenv.useDatabase("iceberg_db_whx");*/
-        tenv.useDatabase("iceberg_db");
-        tenv.executeSql(" DROP TABLE IF EXISTS iceberg.iceberg_db.zhangxuejun_iceberg_table");
-        tenv.executeSql("CREATE TABLE iceberg.iceberg_db.zhangxuejun_iceberg_table (\n" +
+        tableEnv.useDatabase("iceberg_db");
+        tableEnv.executeSql(" DROP TABLE IF EXISTS iceberg.iceberg_db.zhangxuejun_iceberg_table");
+        tableEnv.executeSql("CREATE TABLE iceberg.iceberg_db.zhangxuejun_iceberg_table (\n" +
             " userid int,\n" +
             " f_random_str STRING\n" +
             ")");
         //tenv.executeSql(
         //    "insert into iceberg.iceberg_db.iceberg_001 select * from iceberg.iceberg_db.sourceTable");
 
-        tenv.executeSql("show tables").print();
+        tableEnv.executeSql("show tables").print();
         //   tenv.executeSql("show databases").print();
-        tenv.executeSql("insert into iceberg.iceberg_db.zhangxuejun_iceberg_table values(1,'whx')");
-        tenv.executeSql("insert into iceberg.iceberg_db.zhangxuejun_iceberg_table values(2,'wc')");
+        tableEnv.executeSql("insert into iceberg.iceberg_db.zhangxuejun_iceberg_table values(1,'whx')");
+        tableEnv.executeSql("insert into iceberg.iceberg_db.zhangxuejun_iceberg_table values(2,'wc')");
 
 
-        tenv.executeSql("select * from iceberg.iceberg_db.zhangxuejun_iceberg_table").print();
+        tableEnv.executeSql("select * from iceberg.iceberg_db.zhangxuejun_iceberg_table").print();
 
     }
 }

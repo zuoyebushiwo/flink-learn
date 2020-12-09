@@ -48,6 +48,12 @@
             <version>${flink.version}</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/../flink-local/flink-sql-connector-hive-3.1.2_2.12-1.11.2.jar</systemPath>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.avro</groupId>
+                    <artifactId>avro</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- iceberg 要用到，结束 -->
 
