@@ -74,7 +74,7 @@
             <artifactId>iceberg-hive-runtime</artifactId>
             <version>0.10.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/../flink-local/flink-sql-connector-hive-3.1.2_2.12-1.11.2.jar</systemPath>
+            <systemPath>${project.basedir}/../flink-local/iceberg-hive-runtime-0.10.0.jar</systemPath>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.iceberg/iceberg-api -->
