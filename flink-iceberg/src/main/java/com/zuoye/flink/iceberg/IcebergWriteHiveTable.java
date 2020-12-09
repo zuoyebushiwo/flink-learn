@@ -1,5 +1,6 @@
 package com.zuoye.flink.iceberg;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.TableEnvironment;
 
@@ -10,20 +11,21 @@ import org.apache.flink.table.api.TableEnvironment;
  * @projectName flink-learn
  * @description
  */
+@Slf4j
 public class IcebergWriteHiveTable {
 
     public static void main(String[] args) {
+        System.setProperty("HADOOP_USER_NAME", "hive");
+        System.setProperty("HADOOP_CLASSPATH", "D:/program/hadoop-3.1.1/bin/hadoop classpath");
         EnvironmentSettings environmentSettings = EnvironmentSettings.newInstance().inBatchMode().useBlinkPlanner().build();
         TableEnvironment tenv = TableEnvironment.create(environmentSettings);
-        System.setProperty("HADOOP_USER_NAME", "hive");
         tenv.executeSql("CREATE CATALOG iceberg WITH (\n" +
                 "  'type'='iceberg',\n" +
                 "  'catalog-type'='hive'," +
-                "  'uri'='thrift://hd-node-3-41.wakedata.com:9083,thrift://hd-node-3-42.wakedata.com:9083,thrift://wake-sz-vm-3-94.wakedata.com:9083', "
-                +
+                "  'uri'='thrift://hd-node-3-41.wakedata.com:9083,thrift://hd-node-3-42.wakedata.com:9083,thrift://wake-sz-vm-3-94.wakedata.com:9083', " +
                 "  'clients'='5', " +
                 "  'property-version'='1', " +
-                "  'warehouse'='hdfs://hd-node-3-24.wakedata.com:8020/warehouse'" +
+                "  'warehouse'='hdfs://HDFSCluster/warehouse'" +
                 ")");
 
         tenv.useCatalog("iceberg");
