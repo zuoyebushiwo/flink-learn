@@ -32,22 +32,21 @@ public class IcebergWriteHiveTable {
         /*tenv.executeSql("CREATE DATABASE iceberg_db_whx");
         tenv.useDatabase("iceberg_db_whx");*/
         tenv.useDatabase("iceberg_db");
-       /* tenv.executeSql(" DROP TABLE IF EXISTS iceberg.iceberg_db.sourcetable");
-        tenv.executeSql("CREATE TABLE iceberg.iceberg_db.sourcetable (\n" +
+        tenv.executeSql(" DROP TABLE IF EXISTS iceberg.iceberg_db.zhangxuejun_iceberg_table");
+        tenv.executeSql("CREATE TABLE iceberg.iceberg_db.zhangxuejun_iceberg_table (\n" +
             " userid int,\n" +
             " f_random_str STRING\n" +
             ")");
-*/
         //tenv.executeSql(
         //    "insert into iceberg.iceberg_db.iceberg_001 select * from iceberg.iceberg_db.sourceTable");
 
         tenv.executeSql("show tables").print();
         //   tenv.executeSql("show databases").print();
-        tenv.executeSql("insert into iceberg.iceberg_db.sourcetable values(1,'whx')");
-        tenv.executeSql("insert into iceberg.iceberg_db.sourcetable values(2,'wc')");
+        tenv.executeSql("insert into iceberg.iceberg_db.zhangxuejun_iceberg_table values(1,'whx')");
+        tenv.executeSql("insert into iceberg.iceberg_db.zhangxuejun_iceberg_table values(2,'wc')");
 
 
-        tenv.executeSql("select * from iceberg.iceberg_db.sourcetable").print();
+        tenv.executeSql("select * from iceberg.iceberg_db.zhangxuejun_iceberg_table").print();
 
     }
 }
