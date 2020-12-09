@@ -20,4 +20,19 @@
         <scala.version>2.12</scala.version>
         <lombok.version>1.18.12</lombok.version>
     </properties>
+
+    <build>
+        <defaultGoal>compile</defaultGoal>
+        <plugins>
+            <plugin>
+                <!-- 该plugin用于指定编译器的版本 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
