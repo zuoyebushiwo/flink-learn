@@ -46,12 +46,8 @@
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-sql-connector-hive-3.1.2_${scala.version}</artifactId>
             <version>${flink.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.avro</groupId>
-                    <artifactId>avro</artifactId>
-                </exclusion>
-            </exclusions>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../flink-local/flink-sql-connector-hive-3.1.2_2.12-1.11.2.jar</systemPath>
         </dependency>
         <!-- iceberg 要用到，结束 -->
 
@@ -59,6 +55,18 @@
             <groupId>org.apache.iceberg</groupId>
             <artifactId>iceberg-flink</artifactId>
             <version>0.10.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.avro</groupId>
+                    <artifactId>avro</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.10.1</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber -->
