@@ -1,6 +1,18 @@
 package com.zuoye.flink.iceberg;
 
 /**
+ *
+ * add jar hdfs://HDFSCluster/user/flink/iceberg-hive-runtime-0.10.0.jar;
+ * CREATE EXTERNAL TABLE customers STORED BY 'org.apache.iceberg.mr.hive.HiveIcebergStorageHandler'
+ * LOCATION 'hdfs://HDFSCluster/warehouse/iceberg_catalog/iceberg_test/sample'
+ * TBLPROPERTIES (
+ * 'iceberg.mr.table.schema'='{"type":"struct","fields":[{"id":1,"name":"customer_id","required":false,"type":"long"},{"id":2,"name":"first_name","required":false,"type":"string"},{"id":3,"name":"last_name","required":false,"type":"string"}]}',
+ * 'iceberg.mr.table.partition.spec'='{"spec-id":0,"fields":[{"name":"customer_id","transform":"identity","source-id":1,"field-id":1000}]}',
+ * 'dummy'='test'
+ * );
+ *
+ * CREATE EXTERNAL TABLE customers2 STORED BY 'org.apache.iceberg.mr.hive.HiveIcebergStorageHandler' LOCATION 'hdfs://HDFSCluster/warehouse/iceberg_catalog/iceberg_test/sample';
+ *
  * @author ZhangXueJun
  * @title IcebergWriteHadoopTable
  * @date 2020/12/8 15:37
@@ -37,6 +49,8 @@ public class IcebergWriteHadoopTable extends IcebergBatchWrite {
 
 
         tableEnv.executeSql("select * from iceberg.iceberg_db.zhangxuejun_iceberg_table").print();
+
+        // 可以用hive查询
     }
 
 }
