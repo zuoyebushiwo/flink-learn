@@ -11,6 +11,7 @@
     <modules>
         <module>flink-core</module>
         <module>flink-iceberg</module>
+        <module>flink-hudi</module>
     </modules>
 
     <properties>
